@@ -1,0 +1,37 @@
+# Java
+.class
+target
+.jar
+.war
+
+# IDE
+.idea
+.iml
+.classpath
+.project
+.settings
+
+# Eclipse
+.metadata
+
+# Logs
+.log
+
+# Environment  secrets
+.env
+.env.
+application-local.properties
+application-local.yml
+
+# Node
+node_modules
+dist
+.angular
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Azure  local config
+.pem
+.key
