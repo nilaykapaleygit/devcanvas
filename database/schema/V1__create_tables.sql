@@ -58,7 +58,8 @@ CONTACT_MESSAGE
 CREATE TABLE contact_message (
     id BIGINT IDENTITY(1,1) PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
-    email VARCHAR(150) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    subject VARCHAR(200),
     message VARCHAR(MAX) NOT NULL,
-    created_at DATETIME2 DEFAULT GETDATE()
+    created_at DATETIME2 NOT NULL
 );

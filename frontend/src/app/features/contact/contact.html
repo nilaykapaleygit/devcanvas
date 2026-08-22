@@ -1,1 +1,128 @@
-<p>contact works!</p>
+<section class="contact">
+
+  <h1>Contact Me</h1>
+
+  <p>
+    Have a question or want to work together?
+    Send me a message.
+  </p>
+
+  <form [formGroup]="contactForm" (ngSubmit)="submit()">
+
+    <!-- Name -->
+    <div>
+      <label for="name">Name</label>
+
+      <input
+        id="name"
+        type="text"
+        formControlName="name"
+        placeholder="Your name"
+      />
+
+      @if (isFieldInvalid('name')) {
+
+        @if (contactForm.controls.name.hasError('required')) {
+          <small>Name is required.</small>
+        }
+
+        @if (contactForm.controls.name.hasError('maxlength')) {
+          <small>Name cannot exceed 100 characters.</small>
+        }
+      }
+    </div>
+
+
+    <!-- Email -->
+    <div>
+      <label for="email">Email</label>
+
+      <input
+        id="email"
+        type="email"
+        formControlName="email"
+        placeholder="your@email.com"
+      />
+
+      @if (isFieldInvalid('email')) {
+
+        @if (contactForm.controls.email.hasError('required')) {
+          <small>Email is required.</small>
+        }
+
+        @if (contactForm.controls.email.hasError('email')) {
+          <small>Please enter a valid email.</small>
+        }
+      }
+    </div>
+
+
+    <!-- Subject -->
+    <div>
+      <label for="subject">Subject</label>
+
+      <input
+        id="subject"
+        type="text"
+        formControlName="subject"
+        placeholder="Subject"
+      />
+
+      @if (isFieldInvalid('subject')) {
+        <small>Subject cannot exceed 200 characters.</small>
+      }
+    </div>
+
+
+    <!-- Message -->
+    <div>
+      <label for="message">Message</label>
+
+      <textarea
+        id="message"
+        rows="6"
+        formControlName="message"
+        placeholder="Write your message..."
+      ></textarea>
+
+      @if (isFieldInvalid('message')) {
+
+        @if (contactForm.controls.message.hasError('required')) {
+          <small>Message is required.</small>
+        }
+
+        @if (contactForm.controls.message.hasError('maxlength')) {
+          <small>Message cannot exceed 2000 characters.</small>
+        }
+      }
+    </div>
+
+
+    <!-- Success -->
+    @if (successMessage) {
+      <p>{{ successMessage }}</p>
+    }
+
+
+    <!-- Error -->
+    @if (errorMessage) {
+      <p>{{ errorMessage }}</p>
+    }
+
+
+    <!-- Submit -->
+    <button
+      type="submit"
+      [disabled]="isSubmitting">
+
+      @if (isSubmitting) {
+        Sending...
+      } @else {
+        Send Message
+      }
+
+    </button>
+
+  </form>
+
+</section>
