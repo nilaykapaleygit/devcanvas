@@ -1,1 +1,23 @@
-<p>artwork works!</p>
+<h1>My Artwork</h1>
+
+<div class="artwork-grid">
+
+  @for (artwork of artworks; track artwork.id) {
+
+    <article class="artwork-card">
+
+      <img
+        [src]="artwork.imageUrl"
+        [alt]="artwork.title">
+
+      <h2>{{ artwork.title }}</h2>
+
+      <p>{{ artwork.description }}</p>
+
+      <span>{{ artwork.category }}</span>
+
+    </article>
+
+  }
+
+</div>

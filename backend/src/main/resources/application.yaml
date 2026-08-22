@@ -1,3 +1,23 @@
 spring:
   application:
     name: backend
+
+    
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=DEVCANVAS_DB;encrypt=false;trustServerCertificate=true
+    username: devcanvas_mainuser
+    password: Devcanvas@123
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+  jpa:
+    hibernate:
+      ddl-auto: update   # change to validate after tables are created
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.SQLServerDialect    
+
+
+server:
+   port: 8083

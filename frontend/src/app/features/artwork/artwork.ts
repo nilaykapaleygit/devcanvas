@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ArtworkInf, ArtworkService } from '../../core/services/artwork.service';
 
 @Component({
   selector: 'app-artwork',
@@ -8,4 +9,14 @@ import { Component } from '@angular/core';
 })
 export class Artwork {
 
+  private artworkService = inject(ArtworkService);
+
+  artworks: ArtworkInf[] = [];
+
+  ngOnInit(): void {
+
+    this.artworkService.getAllArtworks().subscribe(data => {
+        this.artworks = data;
+      });
+  }
 }
