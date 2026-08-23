@@ -14,9 +14,8 @@ export class Projects {
 
   ngOnInit(): void {
 
-    this.projectService.getAllProjects()
-      .subscribe(data => {
+    this.projectService.getAllProjects().subscribe(data => {
         this.projects = data;
-      });
+    });
   }
 }

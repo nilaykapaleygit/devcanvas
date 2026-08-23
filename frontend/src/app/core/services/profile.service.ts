@@ -1,17 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-
-export interface Profile {
-  id: number;
-  name: string;
-  title: string;
-  bio: string;
-  email: string;
-  githubUrl: string;
-  linkedinUrl: string;
-  resumeUrl: string;
-}
+import { Profile } from "../models/profile.model";
 
 @Injectable({
   providedIn: 'root'

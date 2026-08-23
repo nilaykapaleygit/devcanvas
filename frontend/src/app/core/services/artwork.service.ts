@@ -20,7 +20,7 @@ export class ArtworkService {
 
   private http = inject(HttpClient);
 
-  private apiUrl = 'http://localhost:8080/api/artworks';
+  private apiUrl = 'http://localhost:8083/api/artworks';
 
   getAllArtworks(): Observable<ArtworkInf[]> {
     return this.http.get<ArtworkInf[]>(this.apiUrl);

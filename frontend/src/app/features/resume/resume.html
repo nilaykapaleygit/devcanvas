@@ -1,1 +1,62 @@
-<p>resume works!</p>
+<section class="resume">
+
+  @if (profile) {
+
+    <header>
+      <h1>{{ profile.name }}</h1>
+
+      <h2>{{ profile.title }}</h2>
+
+      <p>
+        {{ profile.bio }}
+      </p>
+    </header>
+
+
+    <section>
+      <h2>Contact</h2>
+
+      <p>{{ profile.email }}</p>
+
+      <p>{{ profile.location }}</p>
+    </section>
+
+
+    <section>
+      <h2>Professional Links</h2>
+
+      <a
+        [href]="profile.githubUrl"
+        target="_blank">
+        GitHub
+      </a>
+
+      <a
+        [href]="profile.linkedinUrl"
+        target="_blank">
+        LinkedIn
+      </a>
+    </section>
+
+
+    <section>
+
+      <a
+        [href]="profile.resumeUrl"
+        target="_blank">
+
+        View / Download Resume
+
+      </a>
+
+    </section>
+
+  }
+
+  @else {
+
+    <p>Loading profile...</p>
+
+  }
+
+</section>

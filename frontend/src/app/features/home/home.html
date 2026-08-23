@@ -1,19 +1,37 @@
+<h1>Welcome to DevCanvas</h1>
+
+<p>
+  Java Full Stack Developer
+</p>
+
 @if (profile) {
 
-  <h1>{{ profile.name }}</h1>
+  <section class="hero">
 
-  <h2>{{ profile.title }}</h2>
+    <h1>
+      Hi, I'm {{ profile.name }}
+    </h1>
 
-  <p>
-    {{ profile.bio }}
-  </p>
+    <h2>
+      {{ profile.title }}
+    </h2>
 
-  <a [href]="profile.githubUrl" target="_blank">
-    GitHub
-  </a>
+    <p>
+      {{ profile.bio }}
+    </p>
 
-  <a [href]="profile.linkedinUrl" target="_blank">
-    LinkedIn
-  </a>
+    <div>
+
+      <a routerLink="/projects">
+        View Projects
+      </a>
+
+      <a routerLink="/resume">
+        View Resume
+      </a>
+
+    </div>
+
+  </section>
 
 }
