@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.devcanvas.backend.dto.ArtworkDto;
 import com.devcanvas.backend.entity.Artwork;
+import com.devcanvas.backend.exception.ResourceNotFoundException;
 import com.devcanvas.backend.mapper.ArtworkMapper;
 import com.devcanvas.backend.repo.ArtworkRepository;
 import com.devcanvas.backend.service.ArtworkService;
@@ -34,7 +35,7 @@ public class ArtworkServinceImpl implements ArtworkService{
 
         Artwork artwork = artworkRepository.findById(id)
                 .orElseThrow(() ->
-                        new RuntimeException("Artwork not found with id: " + id));
+                        new ResourceNotFoundException("Artwork not found with id: " + id));
 
         return ArtworkMapper.toDto(artwork);
     }

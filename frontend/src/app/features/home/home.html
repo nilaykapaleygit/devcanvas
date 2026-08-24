@@ -1,34 +1,76 @@
-<h1>Welcome to DevCanvas</h1>
-
-<p>
-  Java Full Stack Developer
-</p>
-
 @if (profile) {
 
   <section class="hero">
 
-    <h1>
-      Hi, I'm {{ profile.name }}
-    </h1>
+    <div class="hero-container">
 
-    <h2>
-      {{ profile.title }}
-    </h2>
+      <div class="hero-content">
 
-    <p>
-      {{ profile.bio }}
-    </p>
+        <p class="hero-label">
+          JAVA FULL STACK DEVELOPER
+        </p>
 
-    <div>
+        <h1>
+          Hi, I'm
+          <span>{{ profile.name }}</span>
+        </h1>
 
-      <a routerLink="/projects">
-        View Projects
-      </a>
+        <h2>
+          {{ profile.title }}
+        </h2>
 
-      <a routerLink="/resume">
-        View Resume
-      </a>
+        <p class="hero-description">
+          {{ profile.bio }}
+        </p>
+
+
+        <div class="hero-actions">
+
+          <a
+            routerLink="/projects"
+            class="btn btn-primary">
+
+            View Projects
+
+          </a>
+
+          <a
+            routerLink="/resume"
+            class="btn btn-secondary">
+
+            View Resume
+
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section class="section">
+
+    <div class="container">
+
+      <div class="section-header">
+
+        <p class="section-label">
+          01. ABOUT
+        </p>
+
+        <h2 class="section-title">
+          Building things with code.
+        </h2>
+
+        <p class="section-description">
+          I enjoy building reliable backend systems,
+          clean REST APIs and modern web applications.
+        </p>
+
+      </div>
 
     </div>
 

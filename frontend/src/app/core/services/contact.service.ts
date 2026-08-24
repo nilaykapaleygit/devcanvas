@@ -14,15 +14,16 @@ export interface ContactMessage {
 })
 export class ContactService {
 
+
   private http = inject(HttpClient);
 
   private apiUrl = 'http://localhost:8083/api/contact';
 
   sendMessage(
-      message: ContactMessage
-  ): Observable<ContactMessage> {
+    message: ContactMessage
+  ): Observable<void> {
 
-    return this.http.post<ContactMessage>(
+    return this.http.post<void>(
       this.apiUrl,
       message
     );

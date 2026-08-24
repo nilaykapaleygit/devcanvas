@@ -1,23 +1,66 @@
-<h1>My Artwork</h1>
+<section class="artwork">
 
-<div class="artwork-grid">
+  <header class="artwork-header">
 
-  @for (artwork of artworks; track artwork.id) {
+    <h1>My Artwork</h1>
 
-    <article class="artwork-card">
+    <p>
+      A collection of my artwork and creative work.
+    </p>
 
-      <img
-        [src]="artwork.imageUrl"
-        [alt]="artwork.title">
+  </header>
 
-      <h2>{{ artwork.title }}</h2>
 
-      <p>{{ artwork.description }}</p>
+  @if (isLoading) {
 
-      <span>{{ artwork.category }}</span>
-
-    </article>
+    <p>Loading artwork...</p>
 
   }
 
-</div>
+
+  @if (errorMessage) {
+
+    <p>{{ errorMessage }}</p>
+
+  }
+
+
+  @if (!isLoading && !errorMessage) {
+
+    <div class="artwork-grid">
+
+      @for (artwork of artworks; track artwork.id) {
+
+        <article class="artwork-card">
+
+          <img
+            [src]="artwork.imageUrl"
+            [alt]="artwork.title"
+            loading="lazy"
+          >
+
+          <div class="artwork-content">
+
+            <h2>
+              {{ artwork.title }}
+            </h2>
+
+            <p>
+              {{ artwork.description }}
+            </p>
+
+            <span class="category">
+              {{ artwork.category }}
+            </span>
+
+          </div>
+
+        </article>
+
+      }
+
+    </div>
+
+  }
+
+</section>

@@ -1,0 +1,63 @@
+.resume {
+  width: min(100% - 40px, 900px);
+
+  margin: 0 auto;
+
+  padding: 90px 0;
+}
+
+.resume header {
+  padding-bottom: 45px;
+
+  border-bottom: 1px solid var(--border);
+}
+
+.resume h1 {
+  font-size: clamp(42px, 7vw, 70px);
+
+  margin: 0;
+}
+
+.resume h2 {
+  color: var(--accent);
+
+  font-size: 22px;
+
+  font-weight: 500;
+}
+
+.resume p {
+  color: var(--text-secondary);
+
+  font-size: 17px;
+}
+
+.resume section {
+  padding: 35px 0;
+
+  border-bottom: 1px solid var(--border);
+}
+
+.resume a {
+  display: inline-block;
+
+  margin-right: 15px;
+
+  padding: 10px 18px;
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius-sm);
+
+  color: var(--accent);
+
+  transition:
+    border-color var(--transition),
+    background var(--transition);
+}
+
+.resume a:hover {
+  border-color: var(--accent);
+
+  background: rgba(100, 255, 218, 0.06);
+}

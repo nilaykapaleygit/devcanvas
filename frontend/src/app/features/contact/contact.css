@@ -1,0 +1,118 @@
+.contact {
+  width: min(100% - 40px, 800px);
+
+  margin: 0 auto;
+
+  padding: 100px 0;
+}
+
+.contact h1 {
+  font-size: clamp(40px, 6vw, 60px);
+
+  margin-bottom: 10px;
+}
+
+.contact > p {
+  color: var(--text-secondary);
+
+  margin-bottom: 45px;
+}
+
+form {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 22px;
+}
+
+form > div {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+label {
+  color: var(--text-primary);
+
+  font-size: 14px;
+
+  font-weight: 600;
+}
+
+input,
+textarea {
+  width: 100%;
+
+  padding: 14px 16px;
+
+  background: var(--bg-card);
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius-sm);
+
+  color: var(--text-primary);
+
+  outline: none;
+
+  transition:
+    border-color var(--transition),
+    box-shadow var(--transition);
+}
+
+input:focus,
+textarea:focus {
+  border-color: var(--accent);
+
+  box-shadow:
+    0 0 0 3px rgba(100, 255, 218, 0.08);
+}
+
+textarea {
+  min-height: 180px;
+
+  resize: vertical;
+}
+
+small {
+  color: #ff7b7b;
+
+  font-size: 13px;
+}
+
+button {
+  align-self: flex-start;
+
+  padding: 13px 26px;
+
+  border: none;
+
+  border-radius: var(--radius-sm);
+
+  background: var(--accent);
+
+  color: var(--bg-primary);
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform var(--transition),
+    background var(--transition);
+}
+
+button:hover:not(:disabled) {
+  background: var(--accent-hover);
+
+  transform: translateY(-2px);
+}
+
+button:disabled {
+  opacity: 0.5;
+
+  cursor: not-allowed;
+}

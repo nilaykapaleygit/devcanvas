@@ -18,6 +18,18 @@ public class ContactServiceImpl implements ContactService  {
 
     private final ContactMessageRepository repository;
 
+    @Operation(
+    	    summary = "Send contact message",
+    	    description = "Allows visitors to send a message"
+    	)
+    	@ApiResponse(
+    	    responseCode = "201",
+    	    description = "Message successfully created"
+    	)
+    	@ApiResponse(
+    	    responseCode = "400",
+    	    description = "Invalid contact information"
+    	)
     @Override
     public ContactMessageDto createMessage(ContactMessageDto dto) {
 

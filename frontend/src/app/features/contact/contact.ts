@@ -16,65 +16,66 @@ private fb = inject(FormBuilder);
   successMessage = '';
   errorMessage = '';
 
-  contactForm = this.fb.nonNullable.group({
+contactForm = this.fb.nonNullable.group({
 
-    name: ['', [
-      Validators.required,
-      Validators.maxLength(100)
-    ]],
+  name: ['', [
+    Validators.required,
+    Validators.maxLength(100)
+  ]],
 
-    email: ['', [
-      Validators.required,
-      Validators.email,
-      Validators.maxLength(255)
-    ]],
+  email: ['', [
+    Validators.required,
+    Validators.email,
+    Validators.maxLength(255)
+  ]],
 
-    subject: ['', [
-      Validators.maxLength(200)
-    ]],
+  subject: ['', [
+    Validators.maxLength(200)
+  ]],
 
-    message: ['', [
-      Validators.required,
-      Validators.maxLength(2000)
-    ]]
-  });
+  message: ['', [
+    Validators.required,
+    Validators.maxLength(2000)
+  ]]
+});
 
-  submit(): void {
+ submit(): void {
 
-    this.successMessage = '';
-    this.errorMessage = '';
+  this.successMessage = '';
+  this.errorMessage = '';
 
-    if (this.contactForm.invalid) {
-      this.contactForm.markAllAsTouched();
-      return;
-    }
+  if (this.contactForm.invalid) {
 
-    this.isSubmitting = true;
+    this.contactForm.markAllAsTouched();
 
-    this.contactService
-      .sendMessage(this.contactForm.getRawValue())
-      .subscribe({
-
-        next: () => {
-
-          this.successMessage =
-            'Your message has been sent successfully!';
-
-          this.contactForm.reset();
-
-          this.isSubmitting = false;
-        },
-
-        error: () => {
-
-          this.errorMessage =
-            'Unable to send your message. Please try again later.';
-
-          this.isSubmitting = false;
-        }
-      });
+    return;
   }
 
+  this.isSubmitting = true;
+
+  this.contactService
+    .sendMessage(this.contactForm.getRawValue())
+    .subscribe({
+
+      next: () => {
+
+        this.successMessage =
+          'Your message has been sent successfully!';
+
+        this.contactForm.reset();
+
+        this.isSubmitting = false;
+      },
+
+      error: () => {
+
+        this.errorMessage =
+          'Unable to send your message. Please try again later.';
+
+        this.isSubmitting = false;
+      }
+    });
+}
   isFieldInvalid(fieldName: string): boolean {
 
     const field = this.contactForm.get(fieldName);

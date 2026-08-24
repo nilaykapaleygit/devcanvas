@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { ProjectService, Project } from '../../core/services/project.service';
+import { ProjectService } from '../../core/services/project.service';
+import { Project } from '../../core/models/project.model';
 
 @Component({
   selector: 'app-projects',
@@ -8,14 +9,45 @@ import { ProjectService, Project } from '../../core/services/project.service';
   styleUrl: './projects.css',
 })
 export class Projects {
+ 
   private projectService = inject(ProjectService);
 
   projects: Project[] = [];
 
-  ngOnInit(): void {
+  isLoading = true;
 
-    this.projectService.getAllProjects().subscribe(data => {
-        this.projects = data;
-    });
+  errorMessage = '';
+
+  ngOnInit(): void {
+ 
+    this.loadProjects();
+  }
+
+  private loadProjects(): void {
+
+    this.projectService
+      .getAllProjects()
+      .subscribe({
+
+        next: (data) => {
+
+          this.projects = data;
+
+          this.isLoading = false;
+        },
+
+        error: (error) => {
+
+          console.error(
+            'Failed to load projects',
+            error
+          );
+
+          this.errorMessage =
+            'Unable to load projects.';
+
+          this.isLoading = false;
+        }
+      });
   }
 }

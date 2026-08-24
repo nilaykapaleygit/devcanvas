@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.devcanvas.backend.dto.ArtworkDto;
 import com.devcanvas.backend.service.ArtworkService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -27,6 +29,10 @@ public class ArtworkController {
 
     private final ArtworkService artworkService;
 
+    @Operation(
+    	    summary = "Get all artworks",
+    	    description = "Returns all artworks in the portfolio"
+    	)
     @GetMapping
     public ResponseEntity<List<ArtworkDto>> getAllArtworks() {
 
@@ -35,6 +41,14 @@ public class ArtworkController {
         );
     }
 
+    @Operation(
+    	    summary = "Get artwork by ID"
+    	)
+    	@Parameter(
+    	    name = "id",
+    	    description = "Artwork ID",
+    	    required = true
+    	)
     @GetMapping("/{id}")
     public ResponseEntity<ArtworkDto> getArtwork(
             @PathVariable Long id) {
