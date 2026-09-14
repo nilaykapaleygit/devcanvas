@@ -1,63 +1,255 @@
 .resume {
-  width: min(100% - 40px, 900px);
-
+  max-width: 1100px;
   margin: 0 auto;
-
-  padding: 90px 0;
+  padding: 40px 20px;
 }
 
-.resume header {
-  padding-bottom: 45px;
+/* Header */
 
-  border-bottom: 1px solid var(--border);
+.resume-header {
+  margin-bottom: 30px;
 }
 
-.resume h1 {
-  font-size: clamp(42px, 7vw, 70px);
+.resume-header h1 {
+  margin-bottom: 8px;
+}
 
+.resume-header p {
+  color: #666;
+}
+
+
+/* Public Resume */
+
+.public-resume {
+  margin-bottom: 40px;
+}
+
+.public-resume h2,
+.resume-management h2 {
+  margin-bottom: 20px;
+}
+
+.public-resume-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: #fff;
+  color:black;
+}
+
+.resume-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.resume-info h3,
+.resume-info h4 {
+  margin: 0 0 6px;
+}
+
+.resume-info p {
+  margin: 0;
+  color: #777;
+  font-size: 14px;
+}
+
+.resume-icon {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eee;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+
+/* Upload */
+
+.upload-card {
+  padding: 25px;
+  margin-bottom: 30px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.upload-card h3 {
+  margin-top: 0;
+}
+
+.upload-controls {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.selected-file {
+  margin-top: 15px;
+}
+
+.upload-message {
+  margin-top: 15px;
+}
+
+
+/* Resume List */
+
+.resume-list {
+  margin-top: 20px;
+}
+
+.resume-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px;
+  margin-bottom: 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.resume-status {
+  flex: 1;
+}
+
+.public-badge,
+.private-badge {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.public-badge {
+  background: #dff5e5;
+  color: #16803c;
+}
+
+.private-badge {
+  background: #eee;
+  color: #666;
+}
+
+
+/* Buttons */
+
+.resume-actions {
+  display: flex;
+  gap: 8px;
+}
+
+button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.view-btn {
+  background: #333;
+  color: white;
+}
+
+.select-btn {
+  background: #2563eb;
+  color: white;
+}
+
+.selected-btn {
+  background: #ddd;
+  color: #555;
+  cursor: not-allowed;
+}
+
+.delete-btn {
+  background: #dc2626;
+  color: white;
+}
+
+
+/* Right Side PDF Viewer */
+
+.resume-viewer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 1000;
+}
+
+.resume-viewer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 55%;
+  height: 100%;
+  background: white;
+  color: black;
+  box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+}
+
+.viewer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.viewer-header h3 {
   margin: 0;
 }
 
-.resume h2 {
-  color: var(--accent);
-
+.close-btn {
   font-size: 22px;
-
-  font-weight: 500;
+  background: transparent;
+  color: #333;
 }
 
-.resume p {
-  color: var(--text-secondary);
-
-  font-size: 17px;
+.viewer-content {
+  flex: 1;
+  overflow: hidden;
 }
 
-.resume section {
-  padding: 35px 0;
-
-  border-bottom: 1px solid var(--border);
+.viewer-content iframe {
+  border: none;
+  display: block;
 }
 
-.resume a {
-  display: inline-block;
 
-  margin-right: 15px;
+/* Mobile */
 
-  padding: 10px 18px;
+@media (max-width: 768px) {
 
-  border: 1px solid var(--border);
+  .resume-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-  border-radius: var(--radius-sm);
+  .resume-actions {
+    width: 100%;
+    flex-wrap: wrap;
+  }
 
-  color: var(--accent);
+  .upload-controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-  transition:
-    border-color var(--transition),
-    background var(--transition);
-}
+  .public-resume-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
 
-.resume a:hover {
-  border-color: var(--accent);
-
-  background: rgba(100, 255, 218, 0.06);
+  .resume-viewer {
+    width: 100%;
+  }
 }

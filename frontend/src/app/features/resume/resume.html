@@ -1,61 +1,417 @@
 <section class="resume">
 
-  @if (profile) {
+  <!-- ============================= -->
+  <!-- PUBLIC MODE -->
+  <!-- ============================= -->
 
-    <header>
-      <h1>{{ profile.name }}</h1>
+  @if (!isAdmin) {
 
-      <h2>{{ profile.title }}</h2>
+    <section class="public-resume">
 
-      <p>
-        {{ profile.bio }}
-      </p>
-    </header>
+      @if (resumes.length === 0) {
+
+        <p>No Resume Available</p>
+
+      } @else {
+
+        @for (resume of resumes; track resume.id) {
+
+          <div class="public-resume-card">
+
+            <div class="resume-info">
+
+              <h1>
+                {{ resume.name }}
+              </h1>
+
+              <h2>
+                {{ resume.jobTitle }}
+              </h2>
+
+              <p>
+                {{ resume.experience }}
+              </p>
+
+              <div class="skills">
+
+                @for (
+                  skill of resume.skills.split(',');
+                  track skill
+                ) {
+
+                  <span>
+                    {{ skill.trim() }}
+                  </span>
+
+                }
+
+              </div>
+
+            </div>
 
 
-    <section>
-      <h2>Contact</h2>
+            <button
+              type="button"
+              class="view-btn"
+              (click)="viewResume(resume)">
 
-      <p>{{ profile.email }}</p>
+              View Resume
 
-      <p>{{ profile.location }}</p>
-    </section>
+            </button>
 
+          </div>
 
-    <section>
-      <h2>Professional Links</h2>
+        }
 
-      <a
-        [href]="profile.githubUrl"
-        target="_blank">
-        GitHub
-      </a>
-
-      <a
-        [href]="profile.linkedinUrl"
-        target="_blank">
-        LinkedIn
-      </a>
-    </section>
-
-
-    <section>
-
-      <a
-        [href]="profile.resumeUrl"
-        target="_blank">
-
-        View / Download Resume
-
-      </a>
+      }
 
     </section>
 
   }
 
-  @else {
 
-    <p>Loading profile...</p>
+  <!-- ============================= -->
+  <!-- ADMIN MODE -->
+  <!-- ============================= -->
+
+  @if (isAdmin) {
+
+    <header class="resume-header">
+
+      <div>
+
+        <h1>Resume Management</h1>
+
+        <p>
+          Manage your resumes.
+        </p>
+
+      </div>
+
+      <button
+        type="button"
+        class="logout-btn"
+        (click)="logout()">
+
+        Logout
+
+      </button>
+
+    </header>
+
+
+    <!-- ============================= -->
+    <!-- UPLOAD RESUME -->
+    <!-- ============================= -->
+
+    <section class="resume-management">
+
+      <h2>Add Resume</h2>
+
+
+      <div class="upload-card">
+
+
+        <!-- Name -->
+
+        <div class="form-group">
+
+          <label>Name</label>
+
+          <input
+            type="text"
+            [(ngModel)]="name"
+            placeholder="Enter your name"
+          />
+
+        </div>
+
+
+        <!-- Job Title -->
+
+        <div class="form-group">
+
+          <label>Job Title</label>
+
+          <input
+            type="text"
+            [(ngModel)]="jobTitle"
+            placeholder="Enter job title"
+          />
+
+        </div>
+
+
+        <!-- Experience -->
+
+        <div class="form-group">
+
+          <label>Experience</label>
+
+          <input
+            type="text"
+            [(ngModel)]="experience"
+            placeholder="e.g. 5 Years 9 Months"
+          />
+
+        </div>
+
+
+        <!-- Skills -->
+
+        <div class="form-group">
+
+          <label>Technical Skills</label>
+
+          <textarea
+            [(ngModel)]="skills"
+            rows="4"
+            placeholder="Java, Spring Boot, Angular, JPA, Hibernate, SQL Server">
+          </textarea>
+
+        </div>
+
+
+        <!-- PDF -->
+
+        <div class="form-group">
+
+          <label>Resume PDF</label>
+
+          <input
+            type="file"
+            accept=".pdf,application/pdf"
+            (change)="onFileSelected($event)"
+          />
+
+        </div>
+
+
+        @if (selectedFile) {
+
+          <p class="selected-file">
+
+            Selected file:
+            <strong>
+              {{ selectedFile.name }}
+            </strong>
+
+          </p>
+
+        }
+
+
+        @if (uploadMessage) {
+
+          <p class="upload-message">
+            {{ uploadMessage }}
+          </p>
+
+        }
+
+
+        <button
+          type="button"
+          (click)="uploadResume()"
+          [disabled]="uploading">
+
+          {{
+            uploading
+              ? 'Saving...'
+              : 'Save Resume'
+          }}
+
+        </button>
+
+      </div>
+
+
+      <!-- ============================= -->
+      <!-- RESUME LIST -->
+      <!-- ============================= -->
+
+      <section class="resume-list">
+
+        <h2>Uploaded Resumes</h2>
+
+
+        @if (resumes.length === 0) {
+
+          <p>
+            No resumes uploaded yet.
+          </p>
+
+        } @else {
+
+          @for (
+            resume of resumes;
+            track resume.id
+          ) {
+
+            <div class="resume-item">
+
+
+              <!-- Information -->
+
+              <div class="resume-info">
+
+                <h3>
+                  {{ resume.name }}
+                </h3>
+
+                <p>
+                  {{ resume.jobTitle }}
+                </p>
+
+                <p>
+                  {{ resume.experience }}
+                </p>
+
+                <p>
+                  {{ resume.skills }}
+                </p>
+
+                <p>
+                  {{ resume.fileName }}
+                </p>
+
+                <small>
+
+                  Uploaded:
+                  {{ resume.uploadedAt | date:'medium' }}
+
+                </small>
+
+              </div>
+
+
+              <!-- Status -->
+
+              <div class="resume-status">
+
+                @if (resume.publicResume) {
+
+                  <span class="public-badge">
+                    Public
+                  </span>
+
+                } @else {
+
+                  <span class="private-badge">
+                    Private
+                  </span>
+
+                }
+
+              </div>
+
+
+              <!-- Actions -->
+
+              <div class="resume-actions">
+
+
+                <button
+                  type="button"
+                  class="view-btn"
+                  (click)="viewResume(resume)">
+
+                  View
+
+                </button>
+
+
+                @if (resume.publicResume) {
+
+                  <button
+                    type="button"
+                    class="selected-btn"
+                    disabled>
+
+                    Selected
+
+                  </button>
+
+                } @else {
+
+                  <button
+                    type="button"
+                    class="select-btn"
+                    (click)="selectResume(resume.id)">
+
+                    Select
+
+                  </button>
+
+                }
+
+
+                <button
+                  type="button"
+                  class="delete-btn"
+                  (click)="deleteResume(resume.id)">
+
+                  Delete
+
+                </button>
+
+              </div>
+
+            </div>
+
+          }
+
+        }
+
+      </section>
+
+    </section>
+
+  }
+
+
+  <!-- ============================= -->
+  <!-- PDF VIEWER -->
+  <!-- ============================= -->
+
+  @if (selectedResume) {
+
+    <div class="resume-viewer-overlay">
+
+      <div class="resume-viewer">
+
+        <div class="viewer-header">
+
+          <h3>
+            {{ selectedResume.fileName }}
+          </h3>
+
+          <button
+            type="button"
+            class="close-btn"
+            (click)="closeViewer()">
+
+            ✕
+
+          </button>
+
+        </div>
+
+
+        <div class="viewer-content">
+
+          <iframe
+            [src]="selectedResumeUrl"
+            width="100%"
+            height="100%"
+            title="Resume Preview">
+          </iframe>
+
+        </div>
+
+      </div>
+
+    </div>
 
   }
 
